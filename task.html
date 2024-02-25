@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #044c5b;
+            
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            background-color: #7adeed;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 5px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #8a1997;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 7px;
+            background-color: #e8e8e8;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .task-checkbox {
+            margin-right: 10px;
+        }
+
+        #prompt-message {
+            display: none;
+            background-color: #5cb85c;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>To Do List</h1>
+        <form id="taskForm">
+            <div class="form-group">
+                <label for="task">Add Task</label>
+                <input type="text" id="task" name="task" placeholder="Enter task">
+            </div>
+            <button type="button" class="btn" onclick="addTask()">Add Task</button>
+        </form>
+        <div id="prompt-message"></div>
+        <ul>
+            
+        </ul>
+    </div>
+
+    <script>
+        function addTask() {
+            var taskInput = document.getElementById('task');
+            var taskText = taskInput.value.trim();
+            var promptMessage = document.getElementById('prompt-message');
+
+            if (taskText !== '') {
+                var taskList = document.querySelector('ul');
+                var listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <input type="checkbox" class="task-checkbox">
+                    ${taskText}
+                `;
+                taskList.appendChild(listItem);
+
+                taskInput.value = ''; // Clear input field
+
+                // Display prompt message
+                promptMessage.textContent = 'Task added!';
+                promptMessage.style.backgroundColor = '#5cb85c'; // Green background
+                promptMessage.style.display = 'block';
+
+                // Hide prompt message after a short delay (e.g., 2 seconds)
+                setTimeout(function () {
+                    promptMessage.style.display = 'none';
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>
